@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+migrations
+settings.py
+.idea/
+W3RS/settings.py
+media/
+pde/migrations/
