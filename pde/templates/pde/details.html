@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Parallelism by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+	<head>
+		<title>W3RS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+   {% if admin %}
+     <a href="/admin" class="pull-right logout"><i class="fa fa-user-circle-o"></i> Admin</a>
+    {% endif %}
+     <a href="/logout" class="pull-right logout"><i class="fa fa-sign-out"></i>Logout</a>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+
+						<!-- Items -->
+							<div class="items">
+
+								<div class="item intro span-2">
+									<a href="/"><h1>W3RS</h1> <br/></a>
+                                      <b class="text-center user"> User:{{ user }}</b><br />
+								</div>
+                            </div>
+                            <div class="items">
+                                      {%  for p in pde %}
+                                          {% if p.cat > 50 %}
+                                            <article class="item thumb span-1 danger" >
+                                            {% elif p.cat > 30 %}
+                                                <article class="item thumb span-1 warning" >
+                                                {% else %}
+                                                <article class="item thumb span-1 success" >
+                                          {% endif %}
+                                            <h2><i class="fa fa-user-circle-o"></i>  {{ p.user }}  <span class="pull-right">  {{ p.date }}</span></h2>
+                                            <div class="pad">
+                                                <h4><i class="fa fa-desktop"></i>  {{ p.machine }}<span class="pull-right"><i class="fa fa-at"></i>  {{ p.ip }}</span></h4>
+                                            </div>
+                                            <div class="middle">
+                                                <span class="text-center"><i class="fa fa-file"></i> {{ p.exe }}</span>
+                                                <br/>
+                                                <span class="text-center">{{ p.cat }}</span>
+                                                <br/><br/>
+                                                <button class="button" onclick="openfile('/{{ p.pde }}')" ><i class="fa fa-download"></i></button>
+
+                                            </div>
+                                        </article>
+                                          {% cycle '' '' '' '' '</div><div class="items">' %}
+                                      {% endfor %}
+                            </div>
+
+
+
+
+
+
+						<!-- Items -->
+							<div class="items">
+
+
+{#								<article class="item thumb span-3"><h2>Kingdom of the Wind</h2><a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-1"><h2>The Pursuit</h2><a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-2"><h2>Boundless</h2><a href="images/fulls/07.jpg" class="image"><img src="images/thumbs/07.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-2"><h2>The Spectators</h2><a href="images/fulls/08.jpg" class="image"><img src="images/thumbs/08.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-1"><h2>You really got me</h2><a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-2"><h2>Ad Infinitum</h2><a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-1"><h2>Different.</h2><a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-2"><h2>Kingdom of the Wind</h2><a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt=""></a></article>#}
+{#								<article class="item thumb span-1"><h2>Elysium</h2><a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt=""></a></article>#}
+
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<section id="footer">
+{#						<section>#}
+{#							<p>This is <strong>Parallelism</strong>, a responsive portfolio site template by <a href="http://html5up.net">HTML5 UP</a>. Free for personal#}
+{#							and commercial use under the <a href="http://html5up.net/license">Creative Commons Attribution</a> license.</p>#}
+{#						</section>#}
+						<section>
+
+							<ul class="copyright">
+								<li>&copy;W3RS - Avinash Singh</li>
+							</ul>
+						</section>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static "assets/js/jquery.min.js" %}"></script>
+			<script src="{% static "assets/js/jquery.poptrox.min.js" %}"></script>
+			<script src="{% static "assets/js/browser.min.js" %}"></script>
+			<script src="{% static "assets/js/breakpoints.min.js" %}"></script>
+			<script src="{% static "assets/js/util.js" %}"></script>
+			<script src="{% static "assets/js/main.js" %}"></script>
+            <script type="application/javascript">
+                function openfile(url) {
+                    window.open(url)
+                }
+            </script>
+
+	</body>
+</html>
