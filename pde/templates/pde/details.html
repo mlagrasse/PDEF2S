@@ -16,12 +16,16 @@
 		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-preload">
-   {% if admin %}
-     <a href="/admin" class="pull-right logout"><i class="fa fa-user-circle-o"></i> Admin</a>
-    {% endif %}
-     <a href="/logout" class="pull-right logout"><i class="fa fa-sign-out"></i>Logout</a>
+
 		<!-- Wrapper -->
 			<div id="wrapper">
+            <div class="pull-right right">
+               {% if admin %}
+                    <a href="/admin" class="pull-right logout"><i class="fa fa-user-circle-o"></i> Admin</a>
+                {% endif %}
+                <a href="/logout" class="pull-right logout"><i class="fa fa-sign-out"></i>Logout</a>
+                <a href="/account/two_factor" class="pull-right logout"><i class="fa fa-cogs"></i> {{ dfi }}</a>
+            </div>
 
 				<!-- Main -->
 					<section id="main">
@@ -108,7 +112,7 @@
 			<script src="{% static "assets/js/main.js" %}"></script>
             <script type="application/javascript">
                 function openfile(url) {
-                    window.open(url)
+                      window.open(url, "_blank");
                 }
             </script>
 
