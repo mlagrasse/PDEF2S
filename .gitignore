@@ -108,3 +108,5 @@ settings.py
 W3RS/settings.py
 media/
 pde/migrations/
+
+static/
