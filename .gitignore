@@ -105,8 +105,7 @@ venv.bak/
 migrations
 settings.py
 .idea/
-W3RS/settings.py
 media/
 pde/migrations/
 
-static/
+
