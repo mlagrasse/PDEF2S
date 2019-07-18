@@ -1,4 +1,4 @@
-<img src="https://github.com/AvinashSingh786/W2RC/blob/master/static/assets/img/w3rs.png?raw=true" height="150" width="350"/>
+<img src="https://github.com/AvinashSingh786/W3RS/raw/master/static/assets/img/w3rs.png" height="150" width="350"/>
   
  
 ## Windows Registry and RAM  Readiness Storage (W3RS)
@@ -27,7 +27,7 @@ Run the following commands to configure and run the engine.
 (venv)$ python manage.py runsslserver 0.0.0.0:8000  
 ``` 
 
-#IMPORTANT
+## IMPORTANT
 If you plan on using this tool in production please change the following in the settings.py file:
 - SECRET_KEY
 - DEBUG
@@ -38,8 +38,8 @@ If you plan on using this tool in production please change the following in the 
 - EMAIL_HOST_PASSWORD
  
 Below are screenshots of the tool.
-<img src="https://github.com/AvinashSingh786/W2RC/blob/master/static/assets/img/home.png?raw=true" />
-<img src="https://github.com/AvinashSingh786/W2RC/blob/master/static/assets/img/details.png?raw=true" />
+<img src="https://github.com/AvinashSingh786/W3RS/raw/master/static/assets/img/home.png" />
+<img src="https://github.com/AvinashSingh786/W3RS/raw/master/static/assets/img/details.png" />
  
 ## Testing environments
   - Windows 10
