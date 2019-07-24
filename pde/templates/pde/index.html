@@ -38,8 +38,15 @@
                             </div>
 
                                       <div class="items">
+
+                                      {% if username not in dis %}
+                                          <br/>
+                                          <h1>No data found.<br>Please ensure your username on your testing machine is the same as your account username</h1>
+                                      {% endif %}
                                       {%  for p in dis %}
+                                            {% if p == username or admin %}
                                           <a href="details/{{ p }}" ><article class="item thumb span-1"><img src="{% static 'assets/img/User.png' %}"><div class="user-a">{{ p }}</div></article></a>
+                                          {% endif %}
                                         {% cycle '' '' '' '' '</div><div class="items">' %}
                                       {% endfor %}
                                       </div>

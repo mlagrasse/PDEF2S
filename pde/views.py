@@ -15,28 +15,39 @@ from two_factor.signals import user_verified
 from django.contrib.sites.shortcuts import get_current_site
 # Create your views here.
 
+
 @login_required
 def index(request):
 
     dis = PDE.objects.order_by('user').values_list('user', flat=True).distinct()
     admin = request.user.is_staff
+    username = request.user.get_username()
     context = {
         # 'pde': data,
         'dfi': request.user,
         'dis': dis,
-        'admin': admin
+        'admin': admin,
+        'username': username,
+        'len': len(dis)
     }
     return render(request, 'pde/index.html', context)
 
+
 @login_required
 def details(request, user):
-    data = PDE.objects.filter(user=user).order_by('date')[::-1]
+    username = request.user.get_username()
     admin = request.user.is_staff
+    data = []
+    if user == username or admin:
+        data = PDE.objects.filter(user=user).order_by('date')[::-1]
+
     context = {
         'dfi': request.user,
         'pde': data,
         'user': user,
-        'admin': admin
+        'admin': admin,
+        'username': username,
+        'len': len(data)
     }
     return render(request, 'pde/details.html', context)
 

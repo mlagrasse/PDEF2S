@@ -35,7 +35,12 @@
 
 								<div class="item intro span-2" style="padding-left: 15px">
 									 <a href="/"> <img src="{% static 'assets/img/w3rs.png'%}" class="img-responsive" alt="w3rs" height="200"></a>
-                                      <b class="text-center user"> User:{{ user }}</b><br />
+                                      {% if not len %}
+                                          <br/>
+                                          <h1>No data found</h1>
+                                      {% else %}
+                                      <b class="text-center user"> User:{{ user }} </b><br />
+                                    {% endif %}
 								</div>
                             </div>
                             <div class="items">

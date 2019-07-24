@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +12,22 @@
   <![endif]-->
 </head>
 <body>
+<style>
+    body {
+        background-image: url("{% static 'assets/img/bg1.jpg' %}");
+        background-size: cover;
+    }
+</style>
+    <br/>
 
+     <a href="/" > <img src="{% static 'assets/img/w3rs.png'%}" class="img-responsive" alt="w3rs" height="250" width="450" style="text-align: center; margin: 0 auto"></a>
   {% block content_wrapper %}
     <div class="container">
       {% block content %}{% endblock %}
     </div>
   {% endblock %}
 <div class="container text-center"><br/><br/><b>Note: </b> You will need to have enabled 2-factor authentication to enabled for PDE download. <br/>
-        You can enable 2-factor authentication <a href="/account/two_factor/setup/"> here</a> </div>
+        You can enable 2-factor authentication <a href="/account/two_factor/setup/"> here once you have logged in.</a> </div>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
