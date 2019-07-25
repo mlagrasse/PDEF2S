@@ -12,3 +12,6 @@ Pillow
 psutil
 django-otp
 django-otp-yubikey
+django-file-md5
+django-encrypted-filefield
+python-magic-bin

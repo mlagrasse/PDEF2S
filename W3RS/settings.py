@@ -177,3 +177,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'user'
 EMAIL_HOST_PASSWORD = 'password'
+
+DEFF_SALT = "Aasd^*&$E%%#FVTB"
+DEFF_PASSWORD = "W#RS_D3m0"
+DEFF_FETCH_URL_NAME = ""

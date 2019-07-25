@@ -23,6 +23,7 @@ from django.conf import settings
 from django.views.static import serve
 from django.contrib.auth.views import LogoutView
 
+
 admin.site.__class__ = AdminSiteOTPRequired
 
 urlpatterns = [
@@ -32,6 +33,7 @@ urlpatterns = [
     url(r'^pde/', include('pde.urls')),
     url(r'^$', RedirectView.as_view(url='pde/', permanent=False), name='index'),
     url(r'^logout/$', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+
 ]
 
 #

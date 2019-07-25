@@ -13,8 +13,19 @@ from django_otp.decorators import otp_required
 from django.dispatch import receiver
 from two_factor.signals import user_verified
 from django.contrib.sites.shortcuts import get_current_site
+from django_file_md5 import calculate_md5
+from django_encrypted_filefield.views import FetchView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
+import requests
+import os
+import magic
+from django.conf import settings
+from django.core.validators import URLValidator, ValidationError
+from django.http import Http404, HttpResponse
+from django.views.generic import View
 
+from django_encrypted_filefield.crypt import Cryptographer
 
 @login_required
 def index(request):
@@ -68,10 +79,11 @@ def add(request):
     cat = float(strip_tags(request.POST.get("cat", False)))
     exe = strip_tags(request.POST.get("exe", False))
     pde = request.FILES.get('pde', False)
+    key = request.POST.get('Api-Token', False)
 
     response = {"status": 'Error'}
     if ip and machine and user and cat and exe and pde:
-        new = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde)
+        new = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde, hash=calculate_md5(pde), api=key)
         response = {"status": 'Success'}
     permission_classes = (HasAPIKey,)
     return Response(response)
@@ -90,3 +102,18 @@ def test_receiver(request, user, device, **kwargs):
                   % {'username': user.get_username(),
                      'site_name': current_site.name}
         user.email_user(subject='Backup token used', message=message)
+
+
+@otp_required
+@login_required
+def get(request, path):
+    print(path)
+    with open(settings.MEDIA_ROOT+'\\pde\\files\\'+path, "rb") as f:
+        content = f.read()
+
+    content = Cryptographer.decrypted(content)
+    return HttpResponse(
+        content, content_type=magic.Magic(mime=True).from_buffer(content))
+    # response = FileResponse(open(settings.MEDIA_ROOT+'\\pde\\files\\'+path, 'rb'))
+    # return response
+
