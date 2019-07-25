@@ -52,12 +52,12 @@
                                                 {% else %}
                                                 <article class="item thumb span-1 success" >
                                           {% endif %}
-                                            <h2><i class="fa fa-user-circle-o"></i>  {{ p.user }}  <span class="pull-right">  {{ p.date }}</span></h2>
+                                            <h2><i class="fa fa-user-circle-o"></i>  {{ p.user | truncatechars:10}}  <span class="pull-right">  {{ p.date }}</span></h2>
                                             <div class="pad">
-                                                <h4><i class="fa fa-desktop"></i>  {{ p.machine }}<span class="pull-right"><i class="fa fa-at"></i>  {{ p.ip }}</span></h4>
+                                                <h4><i class="fa fa-desktop"></i>  {{ p.machine | truncatechars:10}}<span class="pull-right"><i class="fa fa-at"></i>  {{ p.ip }}</span></h4>
                                             </div>
                                             <div class="middle">
-                                                <span class="text-center"><i class="fa fa-file"></i> {{ p.exe }}</span>
+                                                <span class="text-center"><i class="fa fa-file"></i> {{ p.exe | truncatechars:10 }}</span>
                                                 <br/>
                                                 <span class="text-center">{{ p.cat }}</span>
                                                 <br/><br/>

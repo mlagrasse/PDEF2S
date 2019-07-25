@@ -45,7 +45,7 @@
                                       {% endif %}
                                       {%  for p in dis %}
                                             {% if p == username or admin %}
-                                          <a href="details/{{ p }}" ><article class="item thumb span-1"><img src="{% static 'assets/img/User.png' %}"><div class="user-a">{{ p }}</div></article></a>
+                                          <a href="details/{{ p }}" ><article class="item thumb span-1"><img src="{% static 'assets/img/User.png' %}"><div class="user-a">{{ p | truncatechars:15}}</div></article></a>
                                           {% endif %}
                                         {% cycle '' '' '' '' '</div><div class="items">' %}
                                       {% endfor %}

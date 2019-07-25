@@ -14,14 +14,13 @@ from django.dispatch import receiver
 from two_factor.signals import user_verified
 from django.contrib.sites.shortcuts import get_current_site
 from django_file_md5 import calculate_md5
-from django_encrypted_filefield.views import FetchView
-from django.contrib.auth.mixins import LoginRequiredMixin
+import hashlib
 # Create your views here.
-import requests
+
 import os
 import magic
 from django.conf import settings
-from django.core.validators import URLValidator, ValidationError
+
 from django.http import Http404, HttpResponse
 from django.views.generic import View
 
@@ -79,12 +78,18 @@ def add(request):
     cat = float(strip_tags(request.POST.get("cat", False)))
     exe = strip_tags(request.POST.get("exe", False))
     pde = request.FILES.get('pde', False)
-    key = request.POST.get('Api-Token', False)
-
+    key = request.META.get('HTTP_AUTHORIZATION', False).split(" ")[-1]
     response = {"status": 'Error'}
+    test = ""
     if ip and machine and user and cat and exe and pde:
-        new = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde, hash=calculate_md5(pde), api=key)
+        n = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde, hash=test, api=key)
         response = {"status": 'Success'}
+        m = hashlib.md5()
+        m.update(request.FILES.get('pde', False).read())
+        test = m.hexdigest()
+        print(test)
+        n.hash = test
+        n.save()
     permission_classes = (HasAPIKey,)
     return Response(response)
 
@@ -108,12 +113,28 @@ def test_receiver(request, user, device, **kwargs):
 @login_required
 def get(request, path):
     print(path)
-    with open(settings.MEDIA_ROOT+'\\pde\\files\\'+path, "rb") as f:
+    with open(os.path.join(os.path.join(settings.MEDIA_ROOT, 'pde/files'), path), "rb") as f:
         content = f.read()
 
     content = Cryptographer.decrypted(content)
+
     return HttpResponse(
         content, content_type=magic.Magic(mime=True).from_buffer(content))
     # response = FileResponse(open(settings.MEDIA_ROOT+'\\pde\\files\\'+path, 'rb'))
     # return response
 
+
+#
+# from django.contrib.auth.mixins import LoginRequiredMixin
+# from django_encrypted_filefield.views import FetchView
+#
+#
+# class MyPermissionRequiredMixin(LoginRequiredMixin):
+#     """
+#     Your own rules live here
+#     """
+#     pass
+#
+#
+# class MyFetchView(MyPermissionRequiredMixin, FetchView):
+#     pass
