@@ -11,7 +11,8 @@
 		<title>W3RS</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+
 
 		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 	</head>
@@ -60,6 +61,7 @@
                                                 <span class="text-center"><i class="fa fa-file"></i> {{ p.exe | truncatechars:10 }}</span>
                                                 <br/>
                                                 <span class="text-center">{{ p.cat }}</span>
+                                                <span >MD5: {{ p.hash }}</span>
                                                 <br/><br/>
                                                 <button class="button" onclick="openfile('/{{ p.pde }}')" ><i class="fa fa-download"></i></button>
 

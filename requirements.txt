@@ -5,6 +5,7 @@ django-sslserver
 django-two-factor-auth
 djangorestframework
 djangorestframework-api-key
+django-random-filestorage
 django-cryptography
 numpy
 openpyxl

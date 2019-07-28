@@ -1,5 +1,6 @@
 
 from django.shortcuts import render
+from django.template.defaultfilters import register
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework_api_key.permissions import HasAPIKey
@@ -13,7 +14,7 @@ from django_otp.decorators import otp_required
 from django.dispatch import receiver
 from two_factor.signals import user_verified
 from django.contrib.sites.shortcuts import get_current_site
-from django_file_md5 import calculate_md5
+
 import hashlib
 # Create your views here.
 
@@ -68,6 +69,11 @@ def serve(request, path):
     return response
 
 
+@register.filter(name='trim')
+def trim(value):
+    return value.split('\\')[-1]
+
+
 @api_view(['POST', ])
 def add(request):
     """Endpoints for listing and retrieving PDE."""
@@ -84,11 +90,17 @@ def add(request):
     if ip and machine and user and cat and exe and pde:
         n = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde, hash=test, api=key)
         response = {"status": 'Success'}
-        m = hashlib.md5()
-        m.update(request.FILES.get('pde', False).read())
-        test = m.hexdigest()
-        print(test)
-        n.hash = test
+        file = request.FILES.get('pde', False)
+        md5 = hashlib.md5()
+        file.seek(0)
+        while True:
+            buf = file.read(104857600)
+            if not buf:
+                break
+            md5.update(buf)
+        md5 = md5.hexdigest()
+        file.seek(0)
+        n.hash = md5
         n.save()
     permission_classes = (HasAPIKey,)
     return Response(response)
