@@ -1,5 +1,5 @@
 """
-WSGI config for W3RS project.
+WSGI config for PDEF2S project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'W3RS.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PDEF2S.settings')
 
 application = get_wsgi_application()

@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 from .models import PDE
-from W3RS import settings
+from PDEF2S import settings
 
 
 class PDESerializer(serializers.ModelSerializer):
