@@ -1,4 +1,4 @@
-<img src="https://github.com/mlagrasse/PDEF2S/master/static/assets/img/pdef2s.png" height="150" width="350"/>
+<img src="https://github.com/mlagrasse/PDEF2S/master/static/assets/img/PDEF2S.png" height="150" width="350"/>
 
 # Potential Digital Evidence Forensically Sound Storage (PDEF2S)
 
