@@ -76,19 +76,20 @@ def trim(value):
 
 @api_view(['POST', ])
 def add(request):
+    print(request)
     """Endpoints for listing and retrieving PDE."""
     parser_classes = (FileUploadParser,)
-    ip = strip_tags(request.POST.get("ip", False))
-    machine = strip_tags(request.POST.get("machine", False))
+    source_ip = strip_tags(request.POST.get("source_ip", False))
+    destination_ip = strip_tags(request.POST.get("destination_ip", False))
+    source_mac = strip_tags(request.POST.get("source_mac", False))
+    destination_mac = strip_tags(request.POST.get("destination_mac", False))
     user = strip_tags(request.POST.get("user", False))
-    cat = float(strip_tags(request.POST.get("cat", False)))
-    exe = strip_tags(request.POST.get("exe", False))
     pde = request.FILES.get('pde', False)
     key = request.META.get('HTTP_AUTHORIZATION', False).split(" ")[-1]
     response = {"status": 'Error'}
     test = ""
-    if ip and machine and user and cat and exe and pde:
-        n = PDE.objects.create(ip=ip, machine=machine, user=user, cat=cat, exe=exe, pde=pde, hash=test, api=key)
+    if source_ip and destination_ip and source_mac and destination_mac and user and pde:
+        n = PDE.objects.create(source_ip=source_ip, destination_ip=destination_ip, source_mac=source_mac, destination_mac=destination_mac, user=user, pde=pde, hash=test, api=key)
         response = {"status": 'Success'}
         file = request.FILES.get('pde', False)
         md5 = hashlib.md5()

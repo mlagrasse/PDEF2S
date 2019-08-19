@@ -5,7 +5,7 @@ from .models import PDE
 
 
 class PDEAdmin(admin.ModelAdmin):
-    list_display = ['user', 'machine', 'ip',  'cat', 'exe', 'hash', 'api', 'pde']
+    list_display = ['user', 'source_ip', 'destination_ip',  'source_mac', 'destination_mac', 'hash', 'api', 'pde']
     search_fields = (
         'ip', 'user'
     )

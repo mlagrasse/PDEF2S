@@ -26,7 +26,7 @@ SECRET_KEY = '==snqksaq+(sfvr2^hg90-7&&^pfxut(&r*o#)fpzm83a)ezmu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 PROJECT_NAME = 'PDEF2S'
 # Application definition
